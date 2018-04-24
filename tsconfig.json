@@ -1,0 +1,13 @@
+{
+    "files": [
+        "src/main.ts",
+        "src/tree.ts",
+        "src/graph.ts",
+        "src/search.ts",
+        "src/sorting.ts"
+    ],
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "target": "es5"
+    }
+}
