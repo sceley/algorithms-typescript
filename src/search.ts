@@ -23,7 +23,7 @@ function HashSearch(list:Array<number>, key:number) {
 
 };
 
-export default { 
+export { 
     SeqSearch, 
     BinarySearch, 
     HashSearch 

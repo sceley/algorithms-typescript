@@ -1,3 +1,8 @@
-import sorting from './sorting';
-import search from './search';
-export default { sorting, search };
+import * as sorting from './sorting';
+import * as search from './search';
+import * as tree from './tree';
+import * as graph from './graph';
+export { 
+    sorting, 
+    search 
+};

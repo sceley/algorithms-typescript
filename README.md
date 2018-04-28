@@ -29,28 +29,28 @@ npm run test
 ### graph
 
 ```shell
-const graph = require('algorithms-typescript').graph;
+const graph = require('algorithms-typescript').graph
 //or
-const graph = require('algorithms-typescript/graph');
+const graph = require('algorithms-typescript/lib/graph')
 ```
 ### tree
 
 ```shell
-const tree = require('algorithms-typescript').tree;
+const tree = require('algorithms-typescript').tree
 //or
-const tree = require('algorithms-typescript/tree');
+const tree = require('algorithms-typescript/lib/tree')
 ```
 ### sorting
 
 ```shell
-const sorting = require('algorithms-typescript').sorting;
+const sorting = require('algorithms-typescript').sorting
 //or 
-const sorting = require('algorithms-typescript/sorting');
+const sorting = require('algorithms-typescript/lib/sorting')
 ```
 ### search
 
 ```shell
-const search = require('algorithms-typescript').search;
+const search = require('algorithms-typescript').search
 //or
-const search = require('algorithms-typescript/search');
+const search = require('algorithms-typescript/lib/search')
 ```

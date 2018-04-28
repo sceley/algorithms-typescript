@@ -1,12 +1,15 @@
 {
   "name": "algorithms-typescript",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A using typescript implements classic algorithms and data structures package",
-  "main": "lib/main.js",
+  "main": "/lib/main.js",
   "directories": {
     "lib": "lib"
   },
-  "repository": "git@github.com:sceley/algorithms-typescript.git",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sceley/algorithms-typescript.git"
+  },
   "scripts": {
     "test": "mocha test/test.js",
     "build": "gulp gulpfile.js"
@@ -18,5 +21,10 @@
     "gulp": "^3.9.1",
     "gulp-typescript": "^4.0.2",
     "typescript": "^2.8.3"
-  }
+  },
+  "keywords": [
+    "algorithns",
+    "algorithms-typescript",
+    "data structures"
+  ]
 }

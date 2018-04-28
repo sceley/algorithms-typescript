@@ -175,25 +175,27 @@ function SelectSort(list:Array<number>, option:boolean = true):void {
 
 };
 
+//可将堆序列看成完全二叉树，则堆顶元素（完全二叉树的根）必为序列中n个元素的最小值或最大值
+//终端结点（即叶结点）没有任何子女，无需单独调整
 function HeapSort(list:Array<number>, option:boolean = true):void {
     function HeapAdjust(list:Array<number>, s:number, m:number) {
-        let rc:number = list[s];
+        let rc:number = list[s - 1];
         for (let j:number = 2 * s; j <= m; j *= 2) {
-            if (j < m && list[j] > list[j + 1]) {
+            if (j < m && list[j - 1] > list[j + 1 - 1]) {
                 ++j;
             }
-            if (rc < list[j]) {
+            if (rc < list[j - 1]) {
                 break;
             }
-            list[s] = list[j];
+            list[s - 1] = list[j - 1];
             s = j;
         }
-        list[s] = rc;
+        list[s - 1] = rc;
     };
-    for (let i:number = list.length / 2;  i >= 0; --i) {
+    for (let i:number = Math.floor(list.length / 2);  i > 0; --i) {
         HeapAdjust(list, i, list.length);
     }
-    for (let i = list.length; i > 0; i--) {
+    for (let i:number = list.length - 1; i >= 0; i--) {
         const key = list[0];
         list[0] = list[i];
         list[i] = key;
@@ -202,9 +204,28 @@ function HeapSort(list:Array<number>, option:boolean = true):void {
 };
 
 function MergeSort(list:Array<number>, option:boolean = true):void {
-    
+    function Merge(list:Array<number>, s:number, m:number, t:number):void {
+        for (let j:number = m + 1, k:number = s; s <= m && j <= t; ++k) {
+            if (list[s] < list[j]) {
+                list[k] = list[s++];
+            } else {
+                list[k] = list[j++];
+            }
+        }
+    };
+    function MSort(list:Array<number>, s:number, t:number) {
+        if (s == t) {
+            list[s] = list[s];
+        } else {
+            let m:number = Math.floor((s + t) / 2);
+            MSort(list, s, m);
+            MSort(list, m + 1, t);
+            Merge(list, s, m , t);
+        }
+    };
+    MSort(list, 1, list.length);
 };
-export default { 
+export {
     InsertSort, 
     BInsertSort, 
     ShellSort, 
