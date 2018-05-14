@@ -6,7 +6,7 @@ Using TypeScript implements data structures and classic algorithm, TypeScript co
 
 ## Installing
 
-```shell
+```bash
 npm install algorithms-typescript
 ```
 
@@ -14,13 +14,13 @@ npm install algorithms-typescript
 
 ### to build
 
-```shell
+```bash
 npm run build
 ```
 
 ### to test
 
-```shell
+```bash
 npm run test
 ```
 
@@ -28,28 +28,28 @@ npm run test
 
 ### graph
 
-```shell
+```js
 const graph = require('algorithms-typescript').graph
 //or
 const graph = require('algorithms-typescript/lib/graph')
 ```
 ### tree
 
-```shell
+```js
 const tree = require('algorithms-typescript').tree
 //or
 const tree = require('algorithms-typescript/lib/tree')
 ```
 ### sorting
 
-```shell
+```js
 const sorting = require('algorithms-typescript').sorting
 //or 
 const sorting = require('algorithms-typescript/lib/sorting')
 ```
 ### search
 
-```shell
+```js
 const search = require('algorithms-typescript').search
 //or
 const search = require('algorithms-typescript/lib/search')

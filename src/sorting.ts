@@ -72,14 +72,14 @@ function BInsertSort(list:Array<number>, option:boolean = true):void {
 //子序列的构成不是简单的“逐段分割”，而是将相隔某个增量的记录组成一个子序列
 function ShellSort(list:Array<number>, increments:Array<number>, option:boolean = true):void {
     function ShellInsert(list:Array<number>, dk:number) {
-        for (let i:number = dk; i < list.length; i++) {
-            if (list[i] < list[i - dk]) {
-                const key = list[i];
-                let j:number = i - dk
-                for (; j >= 0 && key > list[j]; j -= dk) {
-                    list[j + dk] = list[j];
+        for (let i:number = dk + 1; i <= list.length; i++) {
+            if (list[i - 1] < list[i - dk - 1]) {
+                const key = list[i - 1];
+                let j:number;
+                for (j = i - dk; j > 0 && key < list[j - 1]; j -= dk) {
+                    list[j + dk - 1] = list[j - 1];
                 }
-                list[j + dk] = key;
+                list[j + dk - 1] = key;
             }
         }
     };
@@ -93,18 +93,18 @@ function ShellSort(list:Array<number>, increments:Array<number>, option:boolean 
 则可分别对这两部分记录进行排序，以达到整个序列有序*/
 function QuickSort(list:Array<number>, option:boolean = true):void {
     function Partition(list:Array<number>, low:number, high:number) {
-        const key = list[low];
+        const key = list[low - 1];
         while (low < high) {
-            while (low < high && list[high] >= key) {
+            while (low < high && list[high - 1] >= key) {
                 high--;
             }
-            list[low] = list[high];
-            while (low < high && list[low] <= key) {
+            list[low - 1] = list[high - 1];
+            while (low < high && list[low - 1] <= key) {
                 low++;
             }
-            list[high] = list[low];
+            list[high - 1] = list[low - 1];
         }
-        list[low] = key;
+        list[low - 1] = key;
         return low;
     };
     function QSort(list:Array<number>, low:number, high:number) {
@@ -114,7 +114,7 @@ function QuickSort(list:Array<number>, option:boolean = true):void {
             QSort(list, pivot + 1, high);
         }
     };
-    QSort(list, 0, list.length);
+    QSort(list, 1, list.length);
 };
 
 //子序列的构成不是简单的“逐段分割”，而是将相隔某个增量的记录组成一个子序列
@@ -181,10 +181,10 @@ function HeapSort(list:Array<number>, option:boolean = true):void {
     function HeapAdjust(list:Array<number>, s:number, m:number) {
         let rc:number = list[s - 1];
         for (let j:number = 2 * s; j <= m; j *= 2) {
-            if (j < m && list[j - 1] > list[j + 1 - 1]) {
+            if (j < m && list[j - 1] < list[j + 1 - 1]) {
                 ++j;
             }
-            if (rc < list[j - 1]) {
+            if (rc > list[j - 1]) {
                 break;
             }
             list[s - 1] = list[j - 1];
@@ -195,35 +195,50 @@ function HeapSort(list:Array<number>, option:boolean = true):void {
     for (let i:number = Math.floor(list.length / 2);  i > 0; --i) {
         HeapAdjust(list, i, list.length);
     }
-    for (let i:number = list.length - 1; i >= 0; i--) {
+    for (let i:number = list.length; i > 0; i--) {
         const key = list[0];
-        list[0] = list[i];
-        list[i] = key;
-        HeapAdjust(list, i, i - 1);
+        list[0] = list[i - 1];
+        list[i - 1] = key;
+        HeapAdjust(list, 1, i - 1);
     }
 };
 
 function MergeSort(list:Array<number>, option:boolean = true):void {
-    function Merge(list:Array<number>, s:number, m:number, t:number):void {
-        for (let j:number = m + 1, k:number = s; s <= m && j <= t; ++k) {
-            if (list[s] < list[j]) {
-                list[k] = list[s++];
+    function Merge(_list:Array<number>, list:Array<number>, s:number, m:number, t:number):void {
+        _list = Object.create(_list);
+        let j:number, k:number;
+        for (j = m + 1, k = s; s <= m && j <= t; ++k) {
+            if (_list[s - 1] < list[j - 1]) {
+                _list[k - 1] = list[s - 1];
+                s++;
             } else {
-                list[k] = list[j++];
+                _list[k - 1] = list[j - 1];
+                j++;
+            }
+        }
+        if (s <= m) {
+            for (let i = 0; s + i <= m; i++) {
+                list[k + i - 1] = _list[s + i - 1];
+            }
+        }
+        if (j <= t) {
+            for (let i = 0; j + i <= t; i++) {
+                list[k + i - 1] = _list[j + i - 1];
             }
         }
     };
-    function MSort(list:Array<number>, s:number, t:number) {
+    function MSort(_list:Array<number>, list:Array<number>, s:number, t:number) {
+        _list = Object.create(_list);
         if (s == t) {
-            list[s] = list[s];
+            _list[s - 1] = list[s - 1];
         } else {
             let m:number = Math.floor((s + t) / 2);
-            MSort(list, s, m);
-            MSort(list, m + 1, t);
-            Merge(list, s, m , t);
+            MSort(_list, list, s, m);
+            MSort(_list, list, m + 1, t);
+            Merge(_list, list, s, m , t);
         }
     };
-    MSort(list, 1, list.length);
+    MSort(list, list, 1, list.length);
 };
 export {
     InsertSort, 

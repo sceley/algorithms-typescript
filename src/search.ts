@@ -1,9 +1,14 @@
 //顺序查找
 function SeqSearch(list:Array<number>, key:number) {
-    
+    for (let i = list.length - 1; i >= 0 ; i--) {
+        if (list[i] == key) {
+            return i;
+        }
+    }
+    return -1;
 };
 
-//
+//折半查找
 function BinarySearch(list:Array<number>, key:number):number {
     let low:number = 0;
     let high:number = list.length - 1;
@@ -17,8 +22,10 @@ function BinarySearch(list:Array<number>, key:number):number {
             low = m + 1;
         }
     }
+    return -1;
 };
 
+//哈希查找
 function HashSearch(list:Array<number>, key:number) {
 
 };

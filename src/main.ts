@@ -4,5 +4,7 @@ import * as tree from './tree';
 import * as graph from './graph';
 export { 
     sorting, 
-    search 
+    search,
+    tree,
+    graph
 };
