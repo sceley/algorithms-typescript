@@ -6,7 +6,7 @@ Using TypeScript implements data structures and classic algorithm, TypeScript co
 
 ## Installing
 
-```bash
+```sh
 npm install algorithms-typescript
 ```
 
@@ -14,13 +14,13 @@ npm install algorithms-typescript
 
 ### to build
 
-```bash
+```sh
 npm run build
 ```
 
 ### to test
 
-```bash
+```sh
 npm run test
 ```
 
